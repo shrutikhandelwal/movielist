@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Details from "./details";
+import { Link, Routes } from 'react-router-dom';
+
 
 const App = () => {
   const [data, setData] = useState([])
+
+
   const fetchApp = () => {
     fetch("http://127.0.0.1:5000/home")
     .then((res) => res.json())
@@ -17,14 +21,19 @@ const App = () => {
   }, [])
 
   return (
-    <div className="App">
+    <div>
       {data.map((dataObj, index) => {
           return (
             <div>
-              <Details movie={dataObj} />
-              {console.log(dataObj)}
+            
+               <Link to="/details" state={dataObj} >
+                <button>{dataObj.title}</button>
+                </Link>
+              {/* {console.log(dataObj)} */}
             </div>
-          );
+            
+            );
+          
         })}
     </div>
   );

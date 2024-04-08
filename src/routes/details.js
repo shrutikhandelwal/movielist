@@ -1,7 +1,11 @@
 import React from "react";
 import "./App.css"
-export default function Details({movie}) {
+import { useLocation } from "react-router-dom";
 
+export default function Details() {
+
+  let { state } = useLocation();
+  let movie = state
   return <div className='div-style' >
       <h1>{movie.title}</h1>
       <h2>{movie.year}</h2>
