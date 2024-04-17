@@ -1,37 +1,61 @@
 import React, { useState, useEffect } from "react";
-import Details from "./details";
-import { Link, Routes } from 'react-router-dom';
-
+import { Link } from 'react-router-dom';
+import * as Sentry from "@sentry/react";
+import UserContext from "../context/usercontext.js";
+import Header from "./header.js";
+import Counter from "./counter.js";
 
 const App = () => {
+ 
   const [data, setData] = useState([])
-
-
-  const fetchApp = () => {
-    fetch("http://127.0.0.1:5000/home")
+  const [userInfo, setUserInfo] = useState()
+  // const [users, setUsers] = useState([])
+ const homeUrl = process.env.REACT_APP_BASE_URL + '/home'
+ const userInfoURL = process.env.REACT_APP_BASE_URL + '/user-info'
+  const fetchMovieList = () => {
+    fetch(homeUrl)
     .then((res) => res.json())
     .then((d) => {
       setData(d["movies"])  
+      // setUsers(d["users"])
     })
-    .catch((error) => console.log(error));
+    .catch((error) => Sentry.captureException(error));
+  }
+
+  const fetchUserInfo = () => {
+    fetch(userInfoURL)
+    .then((res) => res.json())
+    .then((d) => {
+      setUserInfo(d)  
+      console.log(userInfo)
+    })
+    .catch((error) => Sentry.captureException(error));
   }
 
   useEffect(() => {
-    fetchApp();
+    fetchMovieList();
+    fetchUserInfo();
   }, [])
 
   return (
     <div>
+      <Counter></Counter>
+      <UserContext.Provider value={{userInfo}}>
+        <Header />
+      </UserContext.Provider>
       {data.map((dataObj, index) => {
           return (
-            <div>
+            // <ThemeContext.Provider value={{theme, setTheme}}>
+              <div key={index}>
             
                <Link to="/details" state={dataObj} >
+                
                 <button>{dataObj.title}</button>
+                
                 </Link>
               {/* {console.log(dataObj)} */}
-            </div>
-            
+              {/* // </ThemeContext.Provider> */}
+              </div>
             );
           
         })}
