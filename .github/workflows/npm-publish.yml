@@ -23,15 +23,3 @@ jobs:
           node-version: 16
       - run: echo "Hello World"
       - shell: bash
-
-  publish-npm:
-    needs: hello
-    runs-on: ubuntu-latest
-    steps:
-      - name: npm install, build and test
-        uses: actions/checkout@v3
-        uses: actions/setup-node@v3
-        run: |
-            npm install
-            npm run build --if-present
-            npm test
