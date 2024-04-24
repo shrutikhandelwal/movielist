@@ -4,9 +4,14 @@ import * as Sentry from "@sentry/react";
 import UserContext from "../context/usercontext.js";
 import Header from "./header.js";
 import Counter from "./counter.js";
+import { useCookies } from 'react-cookie'
+import store from '.././store/store';
+import ReactGA from 'react-ga4';
+import { useLocation } from 'react-router-dom';
 
 const App = () => {
- 
+  ReactGA.initialize('G-M07MCPQ4FY');
+  const location = useLocation();
   const [data, setData] = useState([])
   const [userInfo, setUserInfo] = useState()
   // const [users, setUsers] = useState([])
@@ -32,7 +37,17 @@ const App = () => {
     .catch((error) => Sentry.captureException(error));
   }
 
+  const handleButtonClick = () => {
+    ReactGA.event({
+      category: 'User',
+      action: 'tap_open_details'
+    });
+  };
+
+
   useEffect(() => {
+    ReactGA.send({ hitType: "pageview", page: window.location.pathname });
+    handleButtonClick();
     fetchMovieList();
     fetchUserInfo();
   }, [])

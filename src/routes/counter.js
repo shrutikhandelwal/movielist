@@ -2,14 +2,22 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { increment, decrement, incrementByAmount } from '../store/counterSlice'
 import { useState } from 'react'
+import { useCookies } from 'react-cookie'
+
 
 function Counter() {
   const count = useSelector((state) => state.counter.value)
   const dispatch = useDispatch()
   const [incrementAmt, setIncrementAmt] = useState('0')
+  const [setCookie] = useCookies(['count']);
+
+  function onValuechange() {
+    setCookie('count', count)
+  }
+
   return (
     <div>
-      <p>Count is : {count} </p>
+      <p onChange={() => {onValuechange()}}>Count is : {count} </p>
 
       <button onClick={() => dispatch(increment())}>Increment </button>
   

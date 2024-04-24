@@ -1,4 +1,5 @@
 
+
 import React from 'react';
 import App from './routes/App';
 import Details from './routes/details';
@@ -8,7 +9,7 @@ import { Routes, Route } from 'react-router-dom';
 import * as Sentry from "@sentry/react";
 import store from './store/store';
 import { Provider } from 'react-redux';
-
+import { CookiesProvider } from 'react-cookie';
 const root = createRoot(document.getElementById("root"));
 
 Sentry.init({
@@ -31,6 +32,8 @@ Sentry.init({
 });
 
 root.render(
+   
+  <CookiesProvider>
   <Provider store={store}>
   <BrowserRouter>
     <Routes>
@@ -39,4 +42,6 @@ root.render(
       </Routes>    
   </BrowserRouter>
   </Provider>
+  </CookiesProvider>
+ 
 );

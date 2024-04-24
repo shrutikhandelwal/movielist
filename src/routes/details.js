@@ -4,16 +4,15 @@ import { useLocation } from "react-router-dom";
 // import ThemeName from "./themename.js";
 import { UseSelecto, useDispatchr, useSelector } from "react-redux";
 import { increment, decrement, incrementByAmount } from "../store/counterSlice";
-
-
+import { useCookies } from 'react-cookie'
 
 export default function Details() {
   const count = useSelector((state) => state.counter.value)
-
+  const  [cookie] = useCookies(['count'])
   let { state } = useLocation();
   let movie = state
   return <div className='div-style' >
-      <h1>count details : {count}</h1>
+      <h1>count details : {cookie.count}</h1>
       {/* <ThemeName /> */}
       <h1>{movie.title}</h1>
       <h2>{movie.year}</h2>
