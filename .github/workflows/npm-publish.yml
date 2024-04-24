@@ -6,20 +6,17 @@ name: Sample Workflow
 on:
   push:
     branches:
-    - main
-    - release/*
+      - main
+      - release/*
   pull_request:
     branches:
-    - main
+      - main
 
 jobs:
   hello:
     runs-on: ubuntu-latest
     steps:
-      - name: hello world 
-        uses: actions/checkout@v3
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16
+      - name: hello world
+      - uses: actions/checkout@v3
         run: echo "Hello World"
         shell: bash
