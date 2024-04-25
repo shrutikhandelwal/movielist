@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Link } from 'react-router-dom';
 import * as Sentry from "@sentry/react";
 import UserContext from "../context/usercontext.js";
@@ -15,7 +15,7 @@ const App = () => {
 
  const homeUrl = process.env.REACT_APP_BASE_URL + '/home'
  const userInfoURL = process.env.REACT_APP_BASE_URL + '/user-info'
-  const fetchMovieList = () => {
+  const fetchMovieList = useCallback(() => {
     fetch(homeUrl)
     .then((res) => res.json())
     .then((d) => {
@@ -23,17 +23,16 @@ const App = () => {
       // setUsers(d["users"])
     })
     .catch((error) => Sentry.captureException(error));
-  }
+  }, [homeUrl])
 
-  const fetchUserInfo = () => {
+  const fetchUserInfo = useCallback(() => {
     fetch(userInfoURL)
     .then((res) => res.json())
     .then((d) => {
       setUserInfo(d)  
-      console.log(userInfo)
     })
     .catch((error) => Sentry.captureException(error));
-  }
+  }, [userInfoURL])
 
   const handleButtonClick = () => {
     ReactGA.event({
@@ -48,7 +47,7 @@ const App = () => {
     handleButtonClick();
     fetchMovieList();
     fetchUserInfo();
-  }, [data, userInfo])
+  }, [fetchMovieList, fetchUserInfo])
 
   return (
     <div>
