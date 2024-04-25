@@ -6,7 +6,7 @@ import { useCookies } from 'react-cookie'
 
 export default function Details() {
   const count = useSelector((state) => state.counter.value)
-  const  [cookie] = useCookies(['count'])
+  const  [cookie] = useCookies([count])
   let { state } = useLocation();
   let movie = state
   return <div className='div-style' >
