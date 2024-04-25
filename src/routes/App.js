@@ -15,9 +15,25 @@ const App = () => {
 
  const homeUrl = process.env.REACT_APP_BASE_URL + '/home'
  const userInfoURL = process.env.REACT_APP_BASE_URL + '/user-info'
- 
+  const fetchMovieList = () => {
+    fetch(homeUrl)
+    .then((res) => res.json())
+    .then((d) => {
+      setData(d["movies"])  
+      // setUsers(d["users"])
+    })
+    .catch((error) => Sentry.captureException(error));
+  }
 
-  
+  const fetchUserInfo = () => {
+    fetch(userInfoURL)
+    .then((res) => res.json())
+    .then((d) => {
+      setUserInfo(d)  
+      console.log(userInfo)
+    })
+    .catch((error) => Sentry.captureException(error));
+  }
 
   const handleButtonClick = () => {
     ReactGA.event({
@@ -28,30 +44,11 @@ const App = () => {
 
 
   useEffect(() => {
-    const fetchMovieList = () => {
-      fetch(homeUrl)
-      .then((res) => res.json())
-      .then((d) => {
-        setData(d["movies"])  
-        // setUsers(d["users"])
-      })
-      .catch((error) => Sentry.captureException(error));
-    }
-    const fetchUserInfo = () => {
-      fetch(userInfoURL)
-      .then((res) => res.json())
-      .then((d) => {
-        setUserInfo(d)  
-        console.log(userInfo)
-      })
-      .catch((error) => Sentry.captureException(error));
-    }
-
     ReactGA.send({ hitType: "pageview", page: window.location.pathname });
     handleButtonClick();
     fetchMovieList();
     fetchUserInfo();
-  }, [])
+  }, [data, userInfo])
 
   return (
     <div>
