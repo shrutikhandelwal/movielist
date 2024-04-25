@@ -5,14 +5,14 @@ import UserContext from "../context/usercontext.js";
 import Header from "./header.js";
 import Counter from "./counter.js";
 import ReactGA from 'react-ga4';
-import { useLocation } from 'react-router-dom';
+
 
 const App = () => {
   ReactGA.initialize('G-M07MCPQ4FY');
 
   const [data, setData] = useState([])
   const [userInfo, setUserInfo] = useState()
-  // const [users, setUsers] = useState([])
+
  const homeUrl = process.env.REACT_APP_BASE_URL + '/home'
  const userInfoURL = process.env.REACT_APP_BASE_URL + '/user-info'
   const fetchMovieList = () => {
