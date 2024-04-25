@@ -1,23 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Link } from 'react-router-dom';
 import * as Sentry from "@sentry/react";
 import UserContext from "../context/usercontext.js";
 import Header from "./header.js";
 import Counter from "./counter.js";
-import { useCookies } from 'react-cookie'
-import store from '.././store/store';
 import ReactGA from 'react-ga4';
-import { useLocation } from 'react-router-dom';
+
 
 const App = () => {
   ReactGA.initialize('G-M07MCPQ4FY');
-  const location = useLocation();
+
   const [data, setData] = useState([])
   const [userInfo, setUserInfo] = useState()
-  // const [users, setUsers] = useState([])
+
  const homeUrl = process.env.REACT_APP_BASE_URL + '/home'
  const userInfoURL = process.env.REACT_APP_BASE_URL + '/user-info'
-  const fetchMovieList = () => {
+  const fetchMovieList = useCallback(() => {
     fetch(homeUrl)
     .then((res) => res.json())
     .then((d) => {
@@ -25,17 +23,16 @@ const App = () => {
       // setUsers(d["users"])
     })
     .catch((error) => Sentry.captureException(error));
-  }
+  }, [homeUrl])
 
-  const fetchUserInfo = () => {
+  const fetchUserInfo = useCallback(() => {
     fetch(userInfoURL)
     .then((res) => res.json())
     .then((d) => {
       setUserInfo(d)  
-      console.log(userInfo)
     })
     .catch((error) => Sentry.captureException(error));
-  }
+  }, [userInfoURL])
 
   const handleButtonClick = () => {
     ReactGA.event({
@@ -50,7 +47,7 @@ const App = () => {
     handleButtonClick();
     fetchMovieList();
     fetchUserInfo();
-  }, [])
+  }, [fetchMovieList, fetchUserInfo])
 
   return (
     <div>
