@@ -28,7 +28,7 @@
     "start:dev": "env-cmd -f /Users/Shruti/Documents/Projects/react-projects/movielist/dev.env react-scripts start",
     "start:stage": "env-cmd  -f /Users/Shruti/Documents/Projects/react-projects/movielist/stage.env react-scripts start",
     "start:prod": "env-cmd  -f /Users/Shruti/Documents/Projects/react-projects/movielist/.prod.env react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts --openssl-legacy-provider build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
