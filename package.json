@@ -2,6 +2,8 @@
   "name": "movielist",
   "version": "0.1.0",
   "private": true,
+
+  "homepage": "https://shrutikhandelwal.github.io/movielist/",
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.3",
     "@sentry/react": "^7.109.0",
@@ -21,8 +23,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "predeploy" : "npm run build",
-    "deploy" : "gh-pages -d build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start:dev": "env-cmd -f /Users/Shruti/Documents/Projects/react-projects/movielist/dev.env react-scripts start",
     "start:stage": "env-cmd  -f /Users/Shruti/Documents/Projects/react-projects/movielist/stage.env react-scripts start",
     "start:prod": "env-cmd  -f /Users/Shruti/Documents/Projects/react-projects/movielist/.prod.env react-scripts start",
@@ -49,6 +51,7 @@
     ]
   },
   "devDependencies": {
-    "dotenv": "^16.4.5"
+    "dotenv": "^16.4.5",
+    "gh-pages": "^6.1.1"
   }
 }
