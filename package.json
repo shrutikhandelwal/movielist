@@ -2,7 +2,7 @@
   "name": "movielist",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://shrutikhandelwal.github.io/movielist/",
+  "homepage": "https://shrutikhandelwal.github.io/movielist/index.js",
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.3",
     "@sentry/react": "^7.109.0",
