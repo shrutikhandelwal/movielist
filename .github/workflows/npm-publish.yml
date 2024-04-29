@@ -21,6 +21,10 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+       - name: Identify to git
+        run: |
+          git config --local user.email "kh.shruti88@gmail.com"
+          git config --local user.name "Shruti Khandelwal"
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
