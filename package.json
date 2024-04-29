@@ -25,7 +25,7 @@
   "scripts": {
     "start": "react-scripts --openssl-legacy-provider start",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -b main -d build",
     "start:dev": "env-cmd -f ./dev.env react-scripts start",
     "start:stage": "env-cmd  -f ./stage.env react-scripts start",
     "start:prod": "env-cmd  -f ./prod.env react-scripts start",
