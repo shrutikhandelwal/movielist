@@ -59,7 +59,7 @@ const App = () => {
           return (
             // <ThemeContext.Provider value={{theme, setTheme}}>
               <div key={index}>
-            
+                <h1>Test</h1>
                <Link to="/details" state={dataObj} >
                 
                 <button>{dataObj.title}</button>
